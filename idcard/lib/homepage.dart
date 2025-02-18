@@ -44,8 +44,43 @@ class Homepage extends StatelessWidget {
               "SUDIP ADHIKARI",
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
             ),
+            SizedBox(
+              height: 20,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Designation:  Cybersecurity Expert",
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+                Text(
+                  "Batch: 2077",
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+                Text(
+                  "Contact No : 9812345678",
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        height: 50,
+        color: Colors.blue,
+        child: Center(
+            child: Text(
+          "www.merotutor.com",
+          style: TextStyle(fontSize: 20, color: Colors.white),
+        )),
       ),
     );
   }
