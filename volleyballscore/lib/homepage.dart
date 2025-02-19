@@ -8,8 +8,12 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+  final TextEditingController updatedteamAname = new TextEditingController();
+  final TextEditingController updatedteamBname = new TextEditingController();
   int teamAscore = 0;
   int teamBscore = 0;
+  String teamNameA = 'A';
+  String teamNameB = 'B';
 
   void incrementTeamA() {
     setState(() {
@@ -18,7 +22,37 @@ class _HomepageState extends State<Homepage> {
   }
 
   void incrementTeamB() {
-    teamBscore++;
+    setState(() {
+      teamBscore++;
+    });
+  }
+
+  void updateteamNameA() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Change Team Name'),
+            content: TextField(
+              controller: updatedteamAname,
+            ),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Cancel')),
+              TextButton(
+                  onPressed: () {
+                    setState(() {
+                      teamNameA = updatedteamAname.text;
+                    });
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Ok')),
+            ],
+          );
+        });
   }
 
   @override
@@ -50,9 +84,15 @@ class _HomepageState extends State<Homepage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text('A',
-                    style:
-                        TextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
+                TextButton(
+                    onPressed: () {
+                      updateteamNameA();
+                    },
+                    child: Text(teamNameA,
+                        style: TextStyle(
+                            fontSize: 40,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black))),
                 Text('B',
                     style:
                         TextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
