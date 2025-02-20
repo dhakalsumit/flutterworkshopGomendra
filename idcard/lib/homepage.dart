@@ -1,7 +1,31 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
-class Homepage extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+class Homepage extends StatefulWidget {
   const Homepage({super.key});
+
+  @override
+  State<Homepage> createState() => _HomepageState();
+}
+
+class _HomepageState extends State<Homepage> {
+  String name = "";
+  String image = "";
+
+  Future<void> getData() async {
+   final response = await http.get(Uri.parse("https://api.github.com/users/sudipadk10")); 
+
+    if (response.statusCode == 200) {
+      
+      final data = json.decode(response.body);
+      setState(() {
+        name = data['name'];
+        image = data['avatar_url'];
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +93,9 @@ class Homepage extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+            SizedBox(
+              height: 30,
             ),
           ],
         ),
